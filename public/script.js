@@ -1,4 +1,10 @@
-const socket = io('https://memory-battle.onrender.com/');
+const socket = io('https://memory-battle.onrender.com/', {
+     reconnection: true,
+     reconnectionDelay: 1000,
+     reconnectionDelayMax: 5000,
+     reconnectionAttempts: 5,
+     transports: ['websocket', 'polling']
+   });
 
 // State
 let currentRoom = null;
