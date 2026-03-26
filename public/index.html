@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memory Battle - Multiplayer Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Home Screen -->
+  <div id="homeScreen" class="screen active">
+    <div class="container">
+      <div class="home-content">
+        <div class="logo-section">
+          <h1 class="title">MEMORY BATTLE</h1>
+          <p class="subtitle">Test Your Memory. Break The Sequence.</p>
+        </div>
+        
+        <div class="button-group">
+          <button id="createRoomBtn" class="btn btn-primary">CREATE ROOM</button>
+          <button id="joinRoomBtn" class="btn btn-secondary">JOIN ROOM</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Room Screen -->
+  <div id="createRoomScreen" class="screen">
+    <div class="container">
+      <div class="form-card">
+        <h2>Create a Room</h2>
+        <div class="form-group">
+          <label for="createName">Your Name</label>
+          <input type="text" id="createName" placeholder="Enter your name" maxlength="20">
+        </div>
+        <button id="createRoomSubmitBtn" class="btn btn-primary">Create Room</button>
+        <button id="backFromCreateBtn" class="btn btn-text">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Join Room Screen -->
+  <div id="joinRoomScreen" class="screen">
+    <div class="container">
+      <div class="form-card">
+        <h2>Join a Room</h2>
+        <div class="form-group">
+          <label for="joinName">Your Name</label>
+          <input type="text" id="joinName" placeholder="Enter your name" maxlength="20">
+        </div>
+        <div class="form-group">
+          <label for="roomCode">Room Code</label>
+          <input type="text" id="roomCode" placeholder="e.g., 4821" maxlength="4">
+        </div>
+        <button id="joinRoomSubmitBtn" class="btn btn-primary">Join Room</button>
+        <button id="backFromJoinBtn" class="btn btn-text">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lobby Screen -->
+  <div id="lobbyScreen" class="screen">
+    <div class="container">
+      <button id="backFromLobbyBtn" class="btn btn-text">← Back</button>
+      <div class="lobby-card">
+        <div class="room-header">
+          <h2>Room Code: <span id="lobbyRoomCode" class="room-code-display">0000</span></h2>
+          <button id="copyCodeBtn" class="btn-copy">📋 Copy</button>
+        </div>
+        
+        <div class="players-section">
+          <h3>Players in Room</h3>
+          <ul id="playersList" class="players-list">
+            <!-- Players will be added here -->
+          </ul>
+        </div>
+        
+        <div id="startGameContainer" style="display: none;">
+          <p class="min-players-msg">✓ Ready to start (3+ players)</p>
+          <button id="startGameBtn" class="btn btn-primary">Start Game</button>
+        </div>
+        <div id="waitingMsg" class="waiting-msg">Waiting for 3+ players...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="gameScreen" class="screen">
+    <div class="container game-container">
+      <button id="backFromGameBtn" class="btn btn-text">← Back</button>
+      <div class="game-header">
+        <div class="game-info">
+          <div class="info-box">
+            <span class="label">Current Turn</span>
+            <span id="currentPlayerName" class="value">Player</span>
+          </div>
+          <div class="info-box">
+            <span class="label">Round</span>
+            <span id="roundNumber" class="value">1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="players-board">
+        <h3>Players</h3>
+        <ul id="gamePlayersList" class="game-players-list">
+          <!-- Players will be added here -->
+        </ul>
+      </div>
+
+      <div id="countingPhase" class="phase-section">
+        <h3>Your Turn?</h3>
+        <div class="input-group">
+          <input type="text" id="playerInput" placeholder="Type your answer..." maxlength="20">
+          <button id="submitBtn" class="btn btn-primary">Submit</button>
+        </div>
+        <p id="inputHint" class="hint"></p>
+      </div>
+
+      <div id="ruleCreationPhase" class="phase-section" style="display: none;">
+        <h3>Create a Rule!</h3>
+        <div class="rule-options">
+          <button class="rule-type-btn" data-rule="replace">
+            <span class="rule-icon">🔤</span>
+            <span class="rule-name">Replace Position</span>
+          </button>
+          <button class="rule-type-btn" data-rule="swap">
+            <span class="rule-icon">🔄</span>
+            <span class="rule-name">Swap Positions</span>
+          </button>
+          <button class="rule-type-btn" data-rule="reverse">
+            <span class="rule-icon">↩️</span>
+            <span class="rule-name">Reverse Sequence</span>
+          </button>
+        </div>
+
+        <!-- Replace Rule Form -->
+        <div id="replaceRuleForm" class="rule-form" style="display: none;">
+          <h4>Replace Position</h4>
+          <div class="form-group">
+            <label>Position (1-10)</label>
+            <input type="number" id="replacePos" min="1" max="10">
+          </div>
+          <div class="form-group">
+            <label>New Value</label>
+            <input type="text" id="replaceValue" placeholder="e.g., Boom, Pizza, etc." maxlength="20">
+          </div>
+          <button id="submitReplaceBtn" class="btn btn-primary">Add Rule</button>
+        </div>
+
+        <!-- Swap Rule Form -->
+        <div id="swapRuleForm" class="rule-form" style="display: none;">
+          <h4>Swap Positions</h4>
+          <div class="form-group">
+            <label>Position 1 (1-10)</label>
+            <input type="number" id="swapPos1" min="1" max="10">
+          </div>
+          <div class="form-group">
+            <label>Position 2 (1-10)</label>
+            <input type="number" id="swapPos2" min="1" max="10">
+          </div>
+          <button id="submitSwapBtn" class="btn btn-primary">Add Rule</button>
+        </div>
+
+        <!-- Reverse Rule Form -->
+        <div id="reverseRuleForm" class="rule-form" style="display: none;">
+          <h4>Reverse the entire sequence!</h4>
+          <p class="rule-description">This will flip the entire sequence upside down.</p>
+          <button id="submitReverseBtn" class="btn btn-primary">Add Rule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div id="gameOverScreen" class="screen">
+    <div class="container">
+      <div class="game-over-card">
+        <h2>🎉 Game Over</h2>
+        <p id="gameOverMessage" class="winner-text">Winner: Player Name</p>
+        <button id="homeBtn" class="btn btn-primary">Back to Home</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rule Display Popup -->
+  <div id="rulePopup" class="rule-popup">
+    <div class="popup-content">
+      <h3>New Rule!</h3>
+      <p id="rulePopupText">Rule text</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,687 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Mono:wght@300;400;500&display=swap');
+
+/* ================================================================
+   MEMORY CHALLENGE — style.css
+   Theme: Black & White Editorial Minimal
+   Fonts: Playfair Display (title) + DM Mono (body)
+================================================================ */
+
+/* ── CSS VARIABLES ── */
+:root {
+  --black:       #0a0a0a;
+  --white:       #f5f5f0;
+  --grey-dark:   #1c1c1c;
+  --grey-mid:    #3a3a3a;
+  --grey-light:  #c8c8c0;
+  --grey-ultra:  #e8e8e3;
+  --accent:      #0a0a0a;
+
+  --card-radius: 12px;
+  --card-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.08);
+  --transition:  0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── RESET & BASE ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--white);
+  color: var(--black);
+  font-family: 'DM Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── SCREEN SYSTEM ── */
+.screen {
+  display: none;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  width: 100%;
+}
+.screen.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+/* ================================================================
+   HOME SCREEN
+================================================================ */
+.home-content {
+  text-align: center;
+  animation: slideUp 0.8s ease-out;
+}
+
+.logo-section {
+  margin-bottom: 60px;
+}
+
+.title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 12vw, 80px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 15px;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--grey-mid);
+  letter-spacing: 0.08em;
+  margin-bottom: 40px;
+}
+
+.button-group {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================================
+   FORM CARDS
+================================================================ */
+.form-card, .lobby-card, .game-over-card {
+  background: var(--white);
+  border: 1px solid var(--grey-ultra);
+  border-radius: var(--card-radius);
+  padding: 40px;
+  box-shadow: var(--card-shadow);
+  animation: slideUp 0.6s ease-out;
+  max-width: 500px;
+  width: 100%;
+}
+
+.form-card h2, .lobby-card h2, .game-over-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: var(--black);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--grey-mid);
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--grey-light);
+  border-radius: 8px;
+  color: var(--black);
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  transition: all var(--transition);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--black);
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.05);
+}
+
+.form-group input::placeholder {
+  color: var(--grey-light);
+}
+
+/* ================================================================
+   BUTTONS
+================================================================ */
+.btn {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 13px 32px;
+  border-radius: 8px;
+  border: 1.5px solid var(--black);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+  background: var(--black);
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--black);
+  border: 1.5px solid var(--black);
+}
+
+.btn-secondary:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.btn-text {
+  background: transparent;
+  color: var(--grey-mid);
+  border: none;
+  padding: 10px 16px;
+  font-size: 12px;
+}
+
+.btn-text:hover {
+  color: var(--black);
+}
+
+.btn-copy {
+  background: var(--white);
+  color: var(--black);
+  border: 1px solid var(--grey-light);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  transition: all var(--transition);
+}
+
+.btn-copy:hover {
+  background: var(--grey-ultra);
+  border-color: var(--black);
+}
+
+/* ================================================================
+   LOBBY SCREEN
+================================================================ */
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--grey-light);
+}
+
+.room-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.room-code-display {
+  color: var(--black);
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 0.05em;
+  font-family: 'DM Mono', monospace;
+}
+
+.players-section {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.players-section h3 {
+  color: var(--black);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.players-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.players-list li {
+  padding: 12px 16px;
+  background: var(--grey-ultra);
+  border-left: 3px solid var(--black);
+  border-radius: 6px;
+  color: var(--black);
+  font-size: 14px;
+}
+
+.waiting-msg {
+  text-align: center;
+  color: var(--grey-mid);
+  margin: 20px 0;
+  font-size: 13px;
+}
+
+.min-players-msg {
+  text-align: center;
+  color: var(--black);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+/* ================================================================
+   GAME SCREEN
+================================================================ */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  align-items: stretch;
+  width: 100%;
+  max-width: 900px;
+}
+
+.game-header {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: var(--grey-ultra);
+  border-radius: var(--card-radius);
+}
+
+.game-info {
+  display: flex;
+  gap: 20px;
+}
+
+.info-box {
+  background: var(--white);
+  border: 1px solid var(--grey-light);
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  min-width: 140px;
+}
+
+.info-box .label {
+  display: block;
+  color: var(--grey-mid);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.info-box .value {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.players-board {
+  background: var(--grey-ultra);
+  border: 1px solid var(--grey-light);
+  border-radius: var(--card-radius);
+  padding: 20px;
+}
+
+.players-board h3 {
+  color: var(--black);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.game-players-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.game-players-list li {
+  padding: 12px;
+  background: var(--white);
+  border: 1px solid var(--grey-light);
+  border-radius: 6px;
+  text-align: center;
+  font-size: 13px;
+  transition: all var(--transition);
+}
+
+.game-players-list li.active {
+  border: 2px solid var(--black);
+  background: var(--white);
+  font-weight: 600;
+}
+
+.game-players-list li.active::after {
+  content: ' ⭐';
+}
+
+.game-players-list li.eliminated {
+  opacity: 0.4;
+  border-color: var(--grey-light);
+  color: var(--grey-mid);
+}
+
+/* ================================================================
+   GAME PHASES
+================================================================ */
+.phase-section {
+  background: var(--grey-ultra);
+  border: 1px solid var(--grey-light);
+  border-radius: var(--card-radius);
+  padding: 30px;
+}
+
+.phase-section h3 {
+  color: var(--black);
+  margin-bottom: 25px;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 12px 16px;
+  background: var(--white);
+  border: 1px solid var(--grey-light);
+  border-radius: 6px;
+  color: var(--black);
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  transition: all var(--transition);
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--black);
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.05);
+}
+
+.input-group .btn {
+  flex-shrink: 0;
+}
+
+.hint {
+  color: var(--grey-mid);
+  font-size: 12px;
+  margin-top: 10px;
+  min-height: 18px;
+}
+
+.hint.error {
+  color: var(--black);
+  font-weight: 600;
+}
+
+/* ================================================================
+   RULE CREATION
+================================================================ */
+.rule-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.rule-type-btn {
+  padding: 16px;
+  background: var(--white);
+  border: 1px solid var(--grey-light);
+  border-radius: 8px;
+  color: var(--black);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition);
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.rule-type-btn:hover {
+  border-color: var(--black);
+  background: var(--grey-ultra);
+  transform: translateY(-2px);
+}
+
+.rule-type-btn.selected {
+  border: 2px solid var(--black);
+  background: var(--black);
+  color: var(--white);
+}
+
+.rule-icon {
+  font-size: 24px;
+}
+
+.rule-name {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.rule-form {
+  background: var(--white);
+  border: 1px solid var(--black);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.rule-form h4 {
+  color: var(--black);
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rule-description {
+  color: var(--grey-mid);
+  margin: 15px 0;
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* ================================================================
+   GAME OVER
+================================================================ */
+.game-over-card {
+  text-align: center;
+}
+
+.game-over-card h2 {
+  margin-bottom: 20px;
+}
+
+.winner-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: var(--black);
+  margin-bottom: 40px;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+/* ================================================================
+   RULE POPUP (shown for 5 seconds)
+================================================================ */
+.rule-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--black);
+  color: var(--white);
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  z-index: 1000;
+  pointer-events: none;
+  display: none;
+  animation: popupAppear 0.4s ease-out;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+
+.rule-popup.show {
+  display: block;
+}
+
+@keyframes popupAppear {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.popup-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.popup-content p {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ================================================================
+   RESPONSIVE
+================================================================ */
+@media (max-width: 768px) {
+  .title {
+    font-size: 44px;
+  }
+
+  .form-card, .lobby-card, .game-over-card {
+    padding: 28px;
+  }
+
+  .game-header {
+    flex-direction: column;
+  }
+
+  .game-info {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .info-box {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .game-players-list {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .rule-options {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .form-card, .lobby-card, .game-over-card {
+    padding: 20px;
+  }
+
+  .form-card h2, .lobby-card h2 {
+    font-size: 22px;
+  }
+
+  .game-players-list {
+    grid-template-columns: 1fr;
+  }
+
+  .phase-section {
+    padding: 20px;
+  }
+
+  .rule-popup {
+    padding: 24px;
+    width: 85%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
